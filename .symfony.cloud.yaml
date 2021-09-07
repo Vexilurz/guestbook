@@ -4,6 +4,7 @@ type: php:8.0
 
 runtime:
     extensions:
+        - pgo_pgsql
         - apcu
         - mbstring
         - sodium
@@ -45,3 +46,6 @@ hooks:
         set -x -e
 
         (>&2 symfony-deploy)
+
+relationships:
+    database: "db:postgresql"
