@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "64cb1e4a1f4d47fb33ea5fc11b2d3b59",
+    "content-hash": "266e031ebfd46405cf2e1ddbbe42a040",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
