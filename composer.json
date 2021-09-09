@@ -24,6 +24,7 @@
         "symfony/string": "5.*",
         "symfony/twig-bundle": "5.*",
         "symfony/validator": "5.*",
+        "symfony/workflow": "5.*",
         "symfony/yaml": "5.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/intl-extra": "^3.3",
