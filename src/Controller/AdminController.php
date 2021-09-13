@@ -15,6 +15,9 @@ use Twig\Environment;
 use Symfony\Bundle\FrameworkBundle\HttpCache\HttpCache;
 use Symfony\Component\HttpKernel\KernelInterface;
 
+/**
+ * @Route("/admin")
+ */
 class AdminController extends AbstractController
 {
     private $twig;
@@ -29,7 +32,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/comment/review/{id}", name="review_comment")
+     * @Route("/comment/review/{id}", name="review_comment")
      */
     public function reviewComment(Request $request, Comment $comment, Registry $registry)
     {
@@ -54,7 +57,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/http-cache/{uri<.*>}", methods={"PURGE"})
+     * @Route("/http-cache/{uri<.*>}", methods={"PURGE"})
      */
     public function purgeHttpCache(KernelInterface $kernel, Request $request,
                                    string $uri)
