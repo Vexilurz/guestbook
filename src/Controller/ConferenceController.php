@@ -17,6 +17,8 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use App\SpamChecker;
 use App\Message\CommentMessage;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Notifier\Notification\Notification;
+use Symfony\Component\Notifier\NotifierInterface;
 
 class ConferenceController extends AbstractController
 {
@@ -63,7 +65,7 @@ class ConferenceController extends AbstractController
      * @Route("/conference/{slug}", name="conference")
      */
     public function show(Request $request, Conference $conference,
-                         CommentRepository $commentRepository, string $photoDir)
+                         CommentRepository $commentRepository, NotifierInterface $notifier, string $photoDir)
     {
         $comment = new Comment();
         $form = $this->createForm(CommentFormType::class, $comment);
@@ -92,7 +94,13 @@ class ConferenceController extends AbstractController
             ];
             $this->bus->dispatch(new CommentMessage($comment->getId(), $context));
 
+            $notifier->send(new Notification('Thank you for the feedback; your comment will be posted after moderation.', ['browser']));
+
             return $this->redirectToRoute('conference', ['slug' => $conference->getSlug()]);
+        }
+
+        if ($form->isSubmitted()) {
+            $notifier->send(new Notification('Can you check your submission? There are some problems with it.', ['browser']));
         }
 
         $offset = max(0, $request->query->getInt('offset', 0));
